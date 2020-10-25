@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Restaurant;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class RestaurantController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +16,8 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        return view('restaurants/index');
+        $restaurants = Restaurant::get();
+        return view('restaurants.index',compact('restaurants'));
     }
 
     /**
@@ -23,7 +27,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('restaurants/create');
+        return view('restaurants.create');
     }
 
     /**
@@ -34,7 +38,28 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $restaurant =  $request->validate([
+        //     'name' => 'required|min:2',
+        //     'address' => 'required|min:2',
+        //     'zipCode' => 'required|numeric',
+        //     'town' => 'required|min:2',
+        //     'country' => 'required|min:2',
+        //     'description' => 'required|min:2',
+        //     'review' => 'required|numeric'
+        // ]);
+        $restaurant = new Restaurant;
+        $restaurant->name = $request->name;
+        $restaurant->address = $request->address;
+        $restaurant->zipCode = $request->zipCode;
+        $restaurant->town = $request->town;
+        $restaurant->country = $request->country;
+        $restaurant->description = $request->description;
+        $restaurant->review = $request->review;
+
+        $restaurant->save();
+
+
+        return redirect()->back();
     }
 
     /**
@@ -43,9 +68,10 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Restaurant $restaurant , $id)
     {
-        return view('restaurants/show', compact($id));
+        $restaurant = Restaurant::findOrFail($id);
+        return view('restaurants/show' , compact('restaurant'));
     }
 
     /**

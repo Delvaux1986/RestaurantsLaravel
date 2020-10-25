@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Restaurant;
+use App\Http\Controllers\Controller;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/restaurants' , 'RestaurantController@index');
+
+Route::get('/' , 'RestaurantController@index');
+
+Route::get('/restaurants/create', 'RestaurantController@create'); // RAPELLEZ A ARNAUD POUR LES ROUTES DANS LE BONNE ORDRE LE PRECISER DANS LE REPO
+
+Route::post('/restaurant/create' ,'RestaurantController@store');
+
+Route::get('/restaurants/show' , 'RestaurantController@show');
+
+Route::get('/restaurants/{id}','RestaurantController@show');
+
+
