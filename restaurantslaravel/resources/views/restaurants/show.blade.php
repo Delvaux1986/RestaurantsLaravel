@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title','{{$restaurant->name}}')
+@section('title','Restaurant')
 
 @section('content')
    
@@ -12,6 +12,7 @@
           <h6 class="card-subtitle mb-2 text-muted"><strong>{{$restaurant->address}} {{$restaurant->zipCode}} {{$restaurant->town}} {{$restaurant->country}}</strong></h6>
           <p class="card-text">{{$restaurant->description}}</p>
           <p>number of review : {{ $restaurant->review }}</p>
+          <a href="/restaurants/edit/{{ $restaurant->id }}">Edit</a>
         </section>
       </section>
     

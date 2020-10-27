@@ -38,15 +38,7 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        // $restaurant =  $request->validate([
-        //     'name' => 'required|min:2',
-        //     'address' => 'required|min:2',
-        //     'zipCode' => 'required|numeric',
-        //     'town' => 'required|min:2',
-        //     'country' => 'required|min:2',
-        //     'description' => 'required|min:2',
-        //     'review' => 'required|numeric'
-        // ]);
+        
         $restaurant = new Restaurant;
         $restaurant->name = $request->name;
         $restaurant->address = $request->address;
@@ -82,7 +74,8 @@ class RestaurantController extends Controller
      */
     public function edit($id)
     {
-        //
+        $restaurant = Restaurant::findOrFail($id);
+        return view('restaurants/edit' , compact('restaurant'));
     }
 
     /**
@@ -94,7 +87,28 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request , [
+            'name' => 'required',
+            'address' => 'required',
+            'zipCode' => 'required',
+            'town' => 'required',
+            'country' => 'required',
+            'description' => 'required',
+            'review' => 'required',
+        ]);
+
+        $restaurant = Restaurant::find($id);
+
+        $restaurant->name = $request->input('name');
+        $restaurant->address = $request->input('address');
+        $restaurant->zipCode = $request->input('zipCode');
+        $restaurant->town = $request->input('town');
+        $restaurant->country = $request->input('country');
+        $restaurant->description = $request->input('description');
+        $restaurant->review = $request->input('review');
+        $restaurant->save();
+
+        return redirect('/');
     }
 
     /**

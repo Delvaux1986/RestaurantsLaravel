@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Restaurant;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Controller;
 
 
@@ -28,4 +29,16 @@ Route::get('/restaurants/show' , 'RestaurantController@show');
 
 Route::get('/restaurants/{id}','RestaurantController@show');
 
+Route::get('/restaurants/edit/{id}' , 'RestaurantController@edit');
 
+Route::patch('/restaurants/edit/{id}','RestaurantController@update');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/dashboard', 'DashboardController@index');
+});
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
