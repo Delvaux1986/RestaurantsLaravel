@@ -17,17 +17,13 @@ use Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Auth::routes();
+
 
 Route::get('/home', 'App\Http\Controllers\RestaurantController@index')->middleware('auth')->name('home');
 
 Route::get('/' , 'App\Http\Controllers\RestaurantController@index')->middleware('auth');
 
-// Route::get('/logout', 'Auth\LoginController@logout');
-
-// Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-
-Route::get('/restaurants/create', 'App\Http\Controllers\RestaurantController@create')->middleware('auth');
+Route::get('/restaurants/create', 'App\Http\Controllers\RestaurantController@create')->middleware('auth')->name('create');
 
 Route::post('/restaurant/create' ,'App\Http\Controllers\RestaurantController@store')->middleware('auth');
 

@@ -6,15 +6,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>@yield('title')</title>
 </head>
-    <a href="/restaurants/create">Create a new Restaurant</a>
-    <a href="/">Home</a>
-    <a href="{{ route('login') }}">login</a>
-    <a href="{{ route('register') }}">Register</a>
-    <<form id="logout-form" action="{{ url('logout') }}" method="POST">
-            {{ csrf_field() }}
-    <button type="submit">Logout</button>
-</form>
-    
+    <nav class="nav nav-pills nav-fill">
+        <li class="nav-item">
+            <a href="{{ url('/') }}" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('/restaurants/create') }}" class="nav-link">New Restaurant</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('login') }}" class="nav-link">login</a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('register') }}" class="nav-link">Register</a>
+        </li>
+        <li class="nav-item">
+            <form id="logout-form" action="{{ url('logout') }}" method="POST">
+                    {{ csrf_field() }}
+            <button type="submit" class="nav-link btn btn-link">Logout</button>
+        </form>
+        </li>
+        <li class="nav-item">
+            <a href="/user/Auth::id()" class="nav-link">Profile</a>
+        </li>
+    </nav>
 
 
  <body class="bg-dark text-center d-flex align-items-center flex-column">
