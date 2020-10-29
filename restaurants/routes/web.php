@@ -17,9 +17,9 @@ use Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Auth::routes();
 
-
-Route::get('/home', 'App\Http\Controllers\RestaurantController@index')->middleware('auth');
+Route::get('/home', 'App\Http\Controllers\RestaurantController@index')->middleware('auth')->name('home');
 
 Route::get('/' , 'App\Http\Controllers\RestaurantController@index')->middleware('auth');
 
